@@ -11,8 +11,10 @@ private const val TAG = "DetailActivity"
 class DetailActivity : AppCompatActivity() {
     private lateinit var mediaImageView: ImageView
     private lateinit var titleTextView: TextView
-    private lateinit var bylineTextView: TextView
-    private lateinit var abstractTextView: TextView
+    private lateinit var overviewTextView: TextView
+    private lateinit var languageTextView: TextView
+    private lateinit var ratingTextView: TextView
+    private lateinit var releaseTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,20 +23,28 @@ class DetailActivity : AppCompatActivity() {
         // TODO: Find the views for the screen
         mediaImageView = findViewById(R.id.mediaImage)
         titleTextView = findViewById(R.id.mediaTitle)
-        bylineTextView = findViewById(R.id.mediaByline)
-        abstractTextView = findViewById(R.id.mediaAbstract)
+        overviewTextView = findViewById(R.id.mediaOverview)
+        languageTextView = findViewById(R.id.mediaLanguage)
+        ratingTextView = findViewById(R.id.mediaRating)
+        releaseTextView = findViewById(R.id.mediaRelease)
+        //abstractTextView = findViewById(R.id.mediaOverview)
 
         // TODO: Get the extra from the Intent
-        val article = intent.getSerializableExtra(ARTICLE_EXTRA) as Article
+        val show = intent.getSerializableExtra(ARTICLE_EXTRA) as TvShow
 
         // TODO: Set the title, byline, and abstract information from the article
-        titleTextView.text = article.headline?.main
-        bylineTextView.text = article.byline?.original
-        abstractTextView.text = article.abstract
+
+        titleTextView.text = show.name
+        overviewTextView.text = show.overview
+        languageTextView.text = show.lang
+        ratingTextView.text = show.rating
+        releaseTextView.text = show.aired
+        //bylineTextView.text = show.byline?.original
+        //abstractTextView.text = show.abstract
 
         // TODO: Load the media image
         Glide.with(this)
-            .load(article.mediaImageUrl)
+            .load(show.posterUrl)
             .into(mediaImageView)
     }
 }
